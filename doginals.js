@@ -480,22 +480,22 @@ async function broadcast(tx, retry) {
     // });
     // exit()
     
-    while (true) {
-        try {
-            // await axios.post(process.env.NODE_RPC_URL, body, options)
-            await axios.post('https://chain.so/api/v3/broadcast_transaction/DOGETEST', data, config)
-            break
-        } catch (e) {
-            if (!retry) throw e
-            let msg = e.response && e.response.data && e.response.data.error && e.response.data.error.message
-            if (msg && msg.includes('too-long-mempool-chain')) {
-                console.warn('retrying, too-long-mempool-chain')
-                await new Promise(resolve => setTimeout(resolve, 1000));
-            } else {
-                throw e
-            }
-        }
-    }
+    // while (true) {
+    //     try {
+    //         // await axios.post(process.env.NODE_RPC_URL, body, options)
+    //         await axios.post('https://chain.so/api/v3/broadcast_transaction/DOGETEST', data, config)
+    //         break
+    //     } catch (e) {
+    //         if (!retry) throw e
+    //         let msg = e.response && e.response.data && e.response.data.error && e.response.data.error.message
+    //         if (msg && msg.includes('too-long-mempool-chain')) {
+    //             console.warn('retrying, too-long-mempool-chain')
+    //             await new Promise(resolve => setTimeout(resolve, 1000));
+    //         } else {
+    //             throw e
+    //         }
+    //     }
+    // }
 
     let wallet = JSON.parse(fs.readFileSync(WALLET_PATH))
 
